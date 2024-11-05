@@ -54,8 +54,5 @@ public class User {
 	@Column(name = "updated_at")
 	@Temporal(TemporalType.TIMESTAMP)
 	@LastModifiedDate
-	private Date updatedAt;
-	
-	
-	
+	private Date updatedAt;	
 }
