@@ -96,12 +96,6 @@ public class UserServiceImpl implements UserService {
 	public User save(User user) {
 		try {
 			UserValidator.save(user);
-			if (repository.findByName(user.getName()) != null) {
-				throw new ValidateServiceException("A record with the name " + user.getName() + " already exists.");
-			}
-			if (repository.findByEmail(user.getEmail()) != null) {
-				throw new ValidateServiceException("A record with the email " + user.getEmail() + " already exists.");
-			}
 			// user.setPassword(passwordEncoder.encode(user.getPassword()));
 			user.setActive(true);
 			User record = repository.save(user);
@@ -122,9 +116,9 @@ public class UserServiceImpl implements UserService {
 			UserValidator.save(user);
 			User record = repository.findById(user.getId())
 					.orElseThrow(() -> new NoDataFoundExeception("No record exists with that ID"));
-			
+
 			validateUniqueField("name", user.getName(), record);
-	        validateUniqueField("email", user.getEmail(), record);
+			validateUniqueField("email", user.getEmail(), record);
 
 			record.setName(user.getName());
 			record.setEmail(user.getEmail());
@@ -149,34 +143,34 @@ public class UserServiceImpl implements UserService {
 
 	// En tu servicio o en una clase auxiliar
 	private void validateUniqueField(String field, String value, User record) {
-	    // Mapa de validadores para cada campo
-	    Map<String, BiConsumer<String, User>> validators = new HashMap<>();
-	    
-	    // Validación para el nombre
-	    validators.put("name", (val, rec) -> {
-	        User existingUserByName = repository.findByName(val);
-	        if (existingUserByName != null && existingUserByName.getId() != rec.getId()) {
-	            throw new ValidateServiceException("A record with the name " + val + " already exists.");
-	        }
-	    });
-	    
-	    // Validación para el correo electrónico
-	    validators.put("email", (val, rec) -> {
-	        User existingUserByEmail = repository.findByEmail(val);
-	        if (existingUserByEmail != null && existingUserByEmail.getId() != rec.getId()) {
-	            throw new ValidateServiceException("A record with the email " + val + " already exists.");
-	        }
-	    });
-	    
-	    // Obtener el validador correspondiente al campo
-	    BiConsumer<String, User> validator = validators.get(field.toLowerCase());
-	    
-	    if (validator != null) {
-	        // Ejecutar la validación
-	        validator.accept(value, record);
-	    } else {
-	        throw new IllegalArgumentException("Unknown field: " + field);
-	    }
+		// Mapa de validadores para cada campo
+		Map<String, BiConsumer<String, User>> validators = new HashMap<>();
+
+		// Validación para el nombre
+		validators.put("name", (val, rec) -> {
+			User existingUserByName = repository.findByName(val);
+			if (existingUserByName != null && existingUserByName.getId() != rec.getId()) {
+				throw new ValidateServiceException("A record with the name " + val + " already exists.");
+			}
+		});
+
+		// Validación para el correo electrónico
+		validators.put("email", (val, rec) -> {
+			User existingUserByEmail = repository.findByEmail(val);
+			if (existingUserByEmail != null && existingUserByEmail.getId() != rec.getId()) {
+				throw new ValidateServiceException("A record with the email " + val + " already exists.");
+			}
+		});
+
+		// Obtener el validador correspondiente al campo
+		BiConsumer<String, User> validator = validators.get(field.toLowerCase());
+
+		if (validator != null) {
+			// Ejecutar la validación
+			validator.accept(value, record);
+		} else {
+			throw new IllegalArgumentException("Unknown field: " + field);
+		}
 	}
 
 	@Override

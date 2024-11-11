@@ -16,33 +16,33 @@ import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 @ControllerAdvice
-public class ErrorHandlerConfig extends ResponseEntityExceptionHandler{
-	
+public class ErrorHandlerConfig extends ResponseEntityExceptionHandler {
+
 	@ExceptionHandler(Exception.class)
-	public ResponseEntity<?> all(Exception e, WebRequest request){
+	public ResponseEntity<?> all(Exception e, WebRequest request) {
 		log.error(e.getMessage(), e);
 		WrapperResponse<?> response = new WrapperResponse<>(false, "Internal Server Error", null);
 		return new ResponseEntity<>(response, HttpStatus.INTERNAL_SERVER_ERROR);
 	}
-	
+
 	@ExceptionHandler(ValidateServiceException.class)
-	public ResponseEntity<?> validateService(ValidateServiceException e, WebRequest request){
+	public ResponseEntity<?> validateService(ValidateServiceException e, WebRequest request) {
 		log.info(e.getMessage(), e);
 		WrapperResponse<?> response = new WrapperResponse<>(false, e.getMessage(), null);
 		return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
 	}
-	
+
 	@ExceptionHandler(NoDataFoundExeception.class)
-	public ResponseEntity<?> noData(NoDataFoundExeception e, WebRequest request){
+	public ResponseEntity<?> noData(NoDataFoundExeception e, WebRequest request) {
 		log.info(e.getMessage(), e);
 		WrapperResponse<?> response = new WrapperResponse<>(false, e.getMessage(), null);
 		return new ResponseEntity<>(response, HttpStatus.NOT_FOUND);
 	}
-	
+
 	@ExceptionHandler(GeneralServiceException.class)
-	public ResponseEntity<?> generalService(GeneralServiceException e, WebRequest request){
+	public ResponseEntity<?> generalService(GeneralServiceException e, WebRequest request) {
 		log.error(e.getMessage(), e);
-		WrapperResponse<?> response = new WrapperResponse<>(false, "Internal Server Error", null);
+		WrapperResponse<?> response = new WrapperResponse<>(false, e.getMessage(), null);
 		return new ResponseEntity<>(response, HttpStatus.INTERNAL_SERVER_ERROR);
 	}
 }

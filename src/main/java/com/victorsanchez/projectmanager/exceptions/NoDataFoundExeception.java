@@ -4,7 +4,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
 @ResponseStatus(code = HttpStatus.NO_CONTENT)
-public class NoDataFoundExeception extends RuntimeException{
+public class NoDataFoundExeception extends RuntimeException {
 
 	/**
 	 * 
@@ -36,5 +36,5 @@ public class NoDataFoundExeception extends RuntimeException{
 		super(cause);
 		// TODO Auto-generated constructor stub
 	}
-	
+
 }

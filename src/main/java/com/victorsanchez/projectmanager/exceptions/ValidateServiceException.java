@@ -4,7 +4,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
 @ResponseStatus(code = HttpStatus.BAD_REQUEST)
-public class ValidateServiceException extends RuntimeException{
+public class ValidateServiceException extends RuntimeException {
 
 	/**
 	 * 
@@ -36,5 +36,5 @@ public class ValidateServiceException extends RuntimeException{
 		super(cause);
 		// TODO Auto-generated constructor stub
 	}
-	
+
 }
