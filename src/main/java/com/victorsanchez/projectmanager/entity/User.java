@@ -17,12 +17,14 @@ import jakarta.persistence.Temporal;
 import jakarta.persistence.TemporalType;
 import jakarta.validation.constraints.Email;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @AllArgsConstructor
 @NoArgsConstructor
+@Builder
 @Setter
 @Getter
 @Entity
@@ -45,6 +47,9 @@ public class User {
 	
 	//@Column(name = "email_verified_at")
 	//private Date emailVerifiedAt ;
+	
+	@Column(name = "active", nullable = false)
+	private Boolean active;
 	
 	@Column(name = "created_at", nullable = false, updatable = false)
 	@Temporal(TemporalType.TIMESTAMP)

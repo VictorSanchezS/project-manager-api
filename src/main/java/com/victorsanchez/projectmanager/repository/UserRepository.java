@@ -11,4 +11,6 @@ import com.victorsanchez.projectmanager.entity.User;
 @Repository
 public interface UserRepository extends JpaRepository<User, Integer>{
 	List<User> findByNameContaining(String name, Pageable page);
+	User findByName(String name);
+	User findByEmail(String email);
 }
