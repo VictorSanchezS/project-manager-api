@@ -1,7 +1,6 @@
 package com.victorsanchez.projectmanager.entity;
 
 import java.util.Date;
-import java.util.Set;
 
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
@@ -17,7 +16,6 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
-import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import jakarta.persistence.Temporal;
 import jakarta.persistence.TemporalType;
@@ -57,16 +55,16 @@ public class Project {
 
 	@ManyToOne
 	@JoinColumn(name = "created_by", nullable = false)
-	@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+	@JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
 	private User createdBy;
 
 	@ManyToOne
 	@JoinColumn(name = "updated_by", nullable = false)
-	@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+	@JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
 	private User updatedBy;
 
-	//@OneToMany(mappedBy = "project")
-	//private Set<Task> tasks;
+	// @OneToMany(mappedBy = "project")
+	// private Set<Task> tasks;
 
 	@Column(name = "created_at", nullable = false, updatable = false)
 	@Temporal(TemporalType.TIMESTAMP)

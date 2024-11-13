@@ -1,7 +1,6 @@
 package com.victorsanchez.projectmanager.entity;
 
 import java.util.Date;
-import java.util.Set;
 
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
@@ -13,7 +12,7 @@ import jakarta.persistence.EntityListeners;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
+
 import jakarta.persistence.Table;
 import jakarta.persistence.Temporal;
 import jakarta.persistence.TemporalType;
@@ -53,20 +52,20 @@ public class User {
 	@Column(name = "active", nullable = false)
 	private Boolean active;
 
-	//@OneToMany(mappedBy = "assignedUser")
-	//private Set<Task> tasks;
+	// @OneToMany(mappedBy = "assignedUser")
+	// private Set<Task> tasks;
 
-	//@OneToMany(mappedBy = "createdBy")
-	//private Set<Project> createdProjects;
+	// @OneToMany(mappedBy = "createdBy")
+	// private Set<Project> createdProjects;
 
-	//@OneToMany(mappedBy = "updatedBy")
-	//private Set<Project> updatedProjects;
+	// @OneToMany(mappedBy = "updatedBy")
+	// private Set<Project> updatedProjects;
 
-	//@OneToMany(mappedBy = "createdBy")
-	//private Set<Task> createdTasks;
+	// @OneToMany(mappedBy = "createdBy")
+	// private Set<Task> createdTasks;
 
-	//@OneToMany(mappedBy = "updatedBy")
-	//private Set<Task> updatedTasks;
+	// @OneToMany(mappedBy = "updatedBy")
+	// private Set<Task> updatedTasks;
 
 	@Column(name = "created_at", nullable = false, updatable = false)
 	@Temporal(TemporalType.TIMESTAMP)
@@ -77,7 +76,5 @@ public class User {
 	@Temporal(TemporalType.TIMESTAMP)
 	@LastModifiedDate
 	private Date updatedAt;
-	
-	
 
 }

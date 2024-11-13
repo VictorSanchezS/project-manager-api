@@ -18,11 +18,20 @@ public class ProjectConverter extends AbstractConverter<Project, ProjectDTO> {
 	public ProjectDTO fromEntity(Project entity) {
 		if (entity == null)
 			return null;
+		
+		Integer createdByUserId = entity.getCreatedBy() != null ? entity.getCreatedBy().getId() : null;
+	    String createdByUserName = entity.getCreatedBy() != null ? entity.getCreatedBy().getName() : null;
+	    
+	    Integer updatedByUserId = entity.getUpdatedBy() != null ? entity.getUpdatedBy().getId() : null;
+	    String updatedByUserName = entity.getUpdatedBy() != null ? entity.getUpdatedBy().getName() : null;
+		
 		return ProjectDTO.builder().id(entity.getId()).name(entity.getName()).description(entity.getDescription())
 				.dueDate(entity.getDueDate()).status(entity.getStatus()).imagePath(entity.getImagePath())
-				.createdById(entity.getCreatedBy().getId()) // Suponiendo que tienes acceso a la relación de usuario
-				.updatedById(entity.getUpdatedBy().getId()).createdAt(entity.getCreatedAt())
-				.updatedAt(entity.getUpdatedAt()).build();
+				.createdById(entity.getCreatedBy().getId())
+				.createdByName(createdByUserName)
+				.updatedById(entity.getUpdatedBy().getId())
+				.updatedByName(updatedByUserName)
+				.build();
 	}
 
 	@Override
@@ -44,12 +53,7 @@ public class ProjectConverter extends AbstractConverter<Project, ProjectDTO> {
 		}
 
 		return Project.builder().id(dto.getId()).name(dto.getName()).description(dto.getDescription())
-				.dueDate(dto.getDueDate()).status(dto.getStatus()).imagePath(dto.getImagePath()).createdBy(createdBy) // Asigna
-																														// el
-																														// usuario
-																														// creado
-				.updatedBy(updatedBy) // Asigna el usuario actualizado
-				.createdAt(dto.getCreatedAt()).updatedAt(dto.getUpdatedAt()).build();
+				.dueDate(dto.getDueDate()).status(dto.getStatus()).imagePath(dto.getImagePath()).createdBy(createdBy).build();
 	}
 
 }

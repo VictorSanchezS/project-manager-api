@@ -21,7 +21,7 @@ public class ErrorHandlerConfig extends ResponseEntityExceptionHandler {
 	@ExceptionHandler(Exception.class)
 	public ResponseEntity<?> all(Exception e, WebRequest request) {
 		log.error(e.getMessage(), e);
-		WrapperResponse<?> response = new WrapperResponse<>(false, "Internal Server Error", null);
+		WrapperResponse<?> response = new WrapperResponse<>(false, e.getMessage(), null);
 		return new ResponseEntity<>(response, HttpStatus.INTERNAL_SERVER_ERROR);
 	}
 

@@ -21,7 +21,7 @@ public class ProjectDTO {
 	private String status;
 	private String imagePath;
 	private Integer createdById;
+	private String createdByName;
 	private Integer updatedById;
-	private Date createdAt;
-	private Date updatedAt;
+    private String updatedByName;
 }

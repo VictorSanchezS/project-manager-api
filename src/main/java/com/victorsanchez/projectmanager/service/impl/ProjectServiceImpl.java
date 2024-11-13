@@ -186,6 +186,7 @@ public class ProjectServiceImpl implements ProjectService {
 	}
 
 	@Override
+	@Transactional()
 	public void delete(int id) {
 		try {
 			// Verificar si el proyecto existe
